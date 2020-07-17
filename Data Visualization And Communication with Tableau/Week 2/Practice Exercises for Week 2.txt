@@ -1,0 +1,181 @@
+## Practice Exercises for Week 2
+Credit: enrique1790
+
+**Excercise 1**
+# Summary
+Variables:Dog ID, User ID, Country, State, Sign in Count, Filter.
+Mark Down: Details, Text
+a) How many unique dogs are in the dataset (Indicated by the number of unique entires in Dog ID)?
+b) How many unique (human) users are in the dataset (indicated by the number of unique entries in User ID)?
+
+##Tableau
+Columns:
+Rows: Sign in Count
+Filters: Dog ID (Group): Other "Other box is checked off"
+DetaiL: Dog ID
+Color: Dog ID (group)
+
+## Comments:
+Dog IDs with Sign in Count of above 175 are grouped and filtered out to exclude these outliers.
+
+# How to Filter to get Dog ID Group :
+1. On The Axis set 175 as the minimum value
+2. Select all the outliers
+3. Right Click and select Group option
+
+### Notes:
+I was able to get around this issue by putting sign in count on rows, Dog ID on detail, 
+and then right clicking on the axis --> edit axis --> fixed --> select 0 - 175.
+once the axis is restricted then I manually drag selected (hold left click) data and made a group. 
+Then i could put this dog id group in the filter card and it works.
+
+**Excercise 2**
+#Summary
+Variables: Total Tests Completed, Breed Type, Breed Group, Dimension. 
+Markdown:
+a) Identify the features of dogs or their ownwers that have correlated with increased completion socres in the past.
+b) We will focus on examining features of dogs that correlate with differences in the number of tests the dogs complete.
+c) How aspects of dogs personalities and breed types affect completion metrics
+
+##Tableau
+Columns:Breed Type
+Rows: Breed Type Median(Total Tests Complete)
+Filters: Dog ID (Group) : Other; Breed Type Select [Cross Breed, Mixed Breed/Other, Popular Hybrid, Pure Breed]
+
+## Comments:
+Median Total Tests Completed for all Breed Types is 7. Is this correct?
+
+## Anaylsis:
+1.I found that average total tests completed were very similar across breed types:
+2. Then I found that except for Pure Breeds, the overwhelming majority of entries is missing a breed group label:
+
+**Excercise 3**
+#Summary
+Variables: DNA tested, Dog Fixed, Total Tests Completed, Breed Type, Dog Fixed, DNA Tested, Total Tests Completed
+Markdown:
+a) to confirm whether or not the dog is pure-bred?
+b) because they are really interested in finding out more about where their dog came from?
+
+##Tableau
+Columns: Breed Group
+Rows: MEDIAN(Total Test Complete), CNTD(Dog ID)
+Filters: Dog ID (Group): Other, Breed Group [Herding, Hound, Non-Sporting, Sporting, Terrier, Toy, Working], Dog ID [Other)
+
+## Comments:
+This bar chart shows the median Total Tests Completed for DNA Tested broken down by Dog Fixed.
+The median Total Tests Completed is highest for dogs which are DNA tested but not spayed/neutered, 
+which supports the hypothesis that owners which intend to breed their digs may be more interested 
+in the personality of their dogs than other owners.
+
+## Analysis 
+"Owners who intend to breed their dogs might be more interested in the personality of their dogs than others 
+(because they will be interested in whether they are breeding a certain kind of temperament)."
+
+It is impossible to breed a dog if the dog is fixed or neutered. If the above hypothesis is true, on average non-fixed dogs 
+should complete more tests than fixed dogs, since the owners of non-fixed might be more interested in the personality of their dogs. 
+However, this is not the case.
+
+On average, fixed dogs completed more tests than non-fixed dogs. I think that the reason fixed dogs completed more tests could be that 
+(1) fixed dogs have stabler moods; 2) the owners of fixed dogs want their dogs to focus on them instead of things that 
+non-fixed dogs could do; 3) fixed dogs have better focus.
+
+**Excercise 4**
+#Summary
+Variables: Dog ID, Country, Total Tets Completed, Show Me 
+Markdown:
+a) whether particular countries and/or states within the US have more Dognition customers than others?
+b) whether customers within specific geographic regions are more likely to complete more tests?
+
+##Tableau
+Columns: Country
+Rows: MEDIAN(Total Tets Complete) CNTD(Dog ID)
+Filters: Dog ID(group): Other [select other], CNTD(Dog ID)[ 30, 10,262], Country [AU, CA, DE, DK, FR, GB, NO, NZ, US]
+Color: Country
+
+## Comments:
+The charts show the median of Total Tests Completed and distinct count of Dog ID for each Country. 
+The distinct count of Dog ID filter includes values greater than or equal to 30. 
+Out of these countries, Germany, Denmark, Norway and New Zealand have higher median Total Tests Completed than the US.
+
+## Analysis
+"As a point of discussion, how can you use the information from these geographic analyses to make a recommendation about a 
+geographical market Dognition should either nurture or move more into?"
+
+The U.S. is Dognition's major market. Runners-up include Canada, Australia, Great Britain. 
+These countries have the most Dognition customers. The result is not surprising given the facts that (1) U.S. is Dognition's home turf; 
+(2) Canada, Australia and Great Britain are famous dog-friendly countries.
+
+In terms of marketing and long-term business strategy, wile it is of Dognition's interest to continue focusing on the above geographical 
+markets, it may also want to expand more into other dog-friendly countries, such as France, Norway and Luxembourg. 
+Logic: If people love dogs, wouldn't they be more interested in their dogs' temperament?
+
+**Excercise 5**
+# Summary
+Variables: Median ITI, Mean ITI, Dog ID, Total Tests Completed
+a) We will throw out some data from dogs who completed 20 or more tests
+b) Our analyses will be biased towards dogs who do not complete all the Dognition Assessments tests, which might not translate
+well do dogs who do finish the Dogntion Assessment tets.
+
+##Tableau
+Columns: Total Tests Completed
+Rows: Mean ITI(minutes) MedianITI(minutes)
+Filters: Dog ID(group)[Other checked off]: Other, Total Tests Completed [1,19], Mean ITI(minutes)
+
+## Show Trend Lines
+1. Right Click
+2. Scroll down to Trend Lines
+3. Select Show Trend Lines
+
+## Comments:
+The trend lines or Mean ITI and Median ITI go in opposite directions.
+The median is less affected by outliers, the Median ITI trend line supports the hypothesis that 
+customers who complete tests more quickly are more likely to complete more tests.
+
+## Analysis
+"In this exercise, we are going to try to assess the hypothesis that customers who complete tests quickly are more likely to 
+complete more tests overall."
+
+There are some level of relations between Mean ITI (minutes) and Total Test Completed or Median ITI (minutes) and Total Test Completed, 
+but the relations are not strong at all. Despite the significant p-values in both cases, R-squared in both cases are extremely low, 
+indicating very little fluctuation (or change) in the number of tests completed can be explained by Median ITI or Mean ITI.
+
+The following regressions have the outliers in Sign-In Count (those above 175) and dogs completed 20 or more tests filtered out. 
+Outliers in Median ITI (minutes) and Mean ITI (minutes) are also filtered out.
+
+Median ITI (minutes) vs. Total Test Completed (19 or less)
+
+p-value is smaller than 0.0001, indicating statistical significance. However, R-squared is only 0.0084051, 
+indicating that less than 1% of the fluctuation (or change) in number of tests completed is explained by the Median ITI (minutes)
+
+Mean ITI (Minutes) vs. Total Tests Completed (19 or less)
+
+p-value is smaller than 0.0001, indicating statistical significance. However, R-squared is only 0.0281518, indicating less than 3% of 
+the variance in number of tests completed is explained by Mean ITI (minutes).
+
+I think it is a good idea to build on previous knowledge and relate the above to Week 2's peer review project where we needed to 
+build our own model.
+
+In multivariate regressions, including statistically insignificant independent variables in the model can dilute model precision and 
+thus result in low R-squared. However, in the case above, there is only one independent variable, Mean ITI (minutes) or Median ITI 
+(minutes), that is statistically significant.
+
+In response to hypothesis in the PDF file whether dogs completed tests more quickly are likely to complete more tests, the conclusion
+is "No", based on the analysis of R-squared.
+
+Sometimes, changing the type of regression will increase the model's predictive power, i.e., a higher R-squared. Take the case of 
+Mean ITI (minutes) vs. Total Test Completed, a power regression DOES improve the fitness of the model.
+
+p-value is still smaller than 0.0001, indicating statistical significance at a 95% confidence interval. R-squared is now increased 
+to 0.257419, indicating that with power regression, about 26% of the variance in the number of tests completed is explained by
+Mean ITI (minutes). R-squared is still low, because we are trying to establish a relation between two variables that have little 
+relation in reality. However, it is a dramatic improve from linear regression and an example of how changing regression method can 
+improve our model's predictive power. Sometimes, people are too constrained to just one type of regression. I mentioned this here
+because this insight may be helpful if we need to build a model again in this course or this specialization. Why is this important? 
+Imagine feeding the linear model into a machine vs. feeding the power model into a machine and have the machine predict the outcome 
+and we prescribe remedies. The machine with the power model will be more accurate. The highest level of analytics, 
+prescriptive analytics, is built upon predictive analytics.
+
+One last note: the exercise PDF file says "put Total Tests Completed on the Columns shelf. Then put Median ITI and Mean ITI on 
+the Rows shelf". I think it should be the other way around as I showed in the power regression above, since we want to know whether 
+dogs who completed tests more quickly completed more tests, in other words, we want to know whether Mean ITI can predict number of
+tests completed. Hence, Mean ITI is the independent variable and Number of Tests Completed is the dependent variable.
